@@ -31,6 +31,6 @@ class TryCatchFinally {
     }
     
     deinit {
-        tryCatchFinally(tryFunc, catchFunc, finallyFunc)
+//        tryCatchFinally(tryFunc, catchFunc, finallyFunc)
     }
 }
