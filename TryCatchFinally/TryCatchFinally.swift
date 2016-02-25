@@ -8,21 +8,21 @@
 
 import Foundation
 
-func try(try:()->())->TryCatchFinally {
-    return TryCatchFinally(try)
+func `try`(`try`:()->())->TryCatchFinally {
+    return TryCatchFinally(`try`)
 }
 class TryCatchFinally {
     let tryFunc : ()->()
     var catchFunc = { (e:NSException!)->() in return }
     var finallyFunc : ()->() = {}
     
-    init(_ try:()->()) {
-        tryFunc = try
+    init(_ `try`:()->()) {
+        tryFunc = `try`
     }
     
-    func catch(catch:(NSException)->())->TryCatchFinally {
+    func `catch`(`catch`:(NSException)->())->TryCatchFinally {
         // objc bridging needs NSException!, not NSException as we'd like to expose to clients.
-        catchFunc = { (e:NSException!) in catch(e) }
+        catchFunc = { (e:NSException!) in `catch`(e) }
         return self
     }
     
