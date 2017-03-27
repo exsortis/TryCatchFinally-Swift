@@ -8,25 +8,25 @@
 
 import Foundation
 
-func `try`(`try`:()->())->TryCatchFinally {
-    return TryCatchFinally(`try`)
+func `trap`(`trap`:@escaping ()->())->TryCatchFinally {
+    return TryCatchFinally(`trap`)
 }
 class TryCatchFinally {
     let tryFunc : ()->()
     var catchFunc = { (e:NSException!)->() in return }
     var finallyFunc : ()->() = {}
     
-    init(_ `try`:()->()) {
-        tryFunc = `try`
+    init(_ `trap`:@escaping ()->()) {
+        tryFunc = `trap`
     }
     
-    func `catch`(`catch`:(NSException)->())->TryCatchFinally {
+    func `handle`(`handle`:@escaping (NSException)->())->TryCatchFinally {
         // objc bridging needs NSException!, not NSException as we'd like to expose to clients.
-        catchFunc = { (e:NSException!) in `catch`(e) }
+        catchFunc = { (e:NSException!) in `handle`(e) }
         return self
     }
     
-    func finally(finally:()->()) {
+    func finally(finally:@escaping ()->()) {
         finallyFunc = finally
     }
     
